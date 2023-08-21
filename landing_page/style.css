@@ -73,3 +73,32 @@ a {
 .header-right-info img {
   width: 300px;
 }
+
+.box {
+  border: 3px solid rgb(59, 130, 246);
+  border-radius: 15px;
+  padding: 16px;
+  margin: 16px;
+  width: 100px;
+  height: 100px;
+}
+
+.card-section h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
