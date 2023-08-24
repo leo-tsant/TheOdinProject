@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(95, 174, 194);
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 480px; /* 16 x 20px */
+  background-color: white;
+  box-shadow: rgba(60, 19, 128, 0.24) 0px 4px 15px;
+}
+
+.grid-item {
+  width: 30px;
+  height: 30px;
+  background-color: lightblue;
+  transition: background-color 0.6s ease 0s;
+}
+
+.grid-item.hovered {
+  background-color: rgb(135, 135, 228);
+}
