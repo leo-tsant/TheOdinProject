@@ -13,16 +13,21 @@ body {
   margin-bottom: 0.5em;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 70px;
-  color: rgb(219, 213, 198);
+  color: #efefef; /* A light color to stand out against the dark theme */
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Giving depth to the text */
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .calc-container {
   width: 400px;
   height: 640px;
-  border: 5px solid rgb(24, 21, 14);
-  background-color: black;
-  border-radius: 10px;
-  box-shadow: rgba(27, 98, 146, 0.24) 10px 10px 15px;
+  background: linear-gradient(145deg, rgba(10, 10, 10, 1), rgba(28, 28, 28, 1));
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.5) -5px -5px 10px,
+    rgba(27, 98, 146, 0.3) 12px 12px 18px, inset rgba(0, 0, 0, 0.2) 1px 1px 4px,
+    inset rgba(255, 255, 255, 0.1) -1px -1px 4px;
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -35,15 +40,20 @@ body {
   width: calc(
     100% - 4 * 5px
   ); /* 5 px padding on each side of calc-container + 5px padding in calc-screen */
+  overflow: hidden;
+  white-space: nowrap;
   border-bottom: 3px solid #afafaf;
   border-radius: 5px;
   padding: 5px;
   background-color: rgb(56, 56, 46);
   font-size: 80px;
-  color: #afafaf;
+  color: #efefef;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  background: linear-gradient(to bottom, #6d6d57, #4c4c36);
+  box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 5px rgba(0, 0, 0, 0.3); /* Inner shadows */
 }
 
 .calc-buttons {
@@ -69,6 +79,9 @@ body {
   align-items: center;
   font-size: 40px;
   font-weight: 600;
+
+  background: linear-gradient(to bottom, #d6e8f2, #b0c7d4);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
@@ -79,8 +92,16 @@ body {
   transition: all 0.3s ease;
 }
 
-.operator {
+.button:active {
+  transform: scale(0.97) translateY(2px); /* This pushes the button slightly down when pressed */
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* The shadow is reduced to give the pressed effect */
+}
+
+.operator,
+#change-sign {
   background-color: rgb(6, 92, 121);
+  background: linear-gradient(to bottom, #0893b2, #06687f);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .operator:hover {
@@ -91,11 +112,42 @@ body {
   transition: all 0.3s ease;
 }
 
+.operator:active {
+  transform: scale(0.97) translateY(2px);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 #equals {
   flex: 1;
   background-color: rgb(207, 137, 6);
+  background: linear-gradient(to bottom, #ffcb55, #8f6b07);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#equals:active {
+  transform: scale(0.97) translateY(2px);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #clear {
   background-color: rgb(158, 40, 40);
+  background: linear-gradient(to bottom, #ff6c6c, #630d0d);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#clear:active {
+  transform: scale(0.97) translateY(2px);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#delete {
+  background-color: rgb(14, 13, 13);
+  color: aliceblue;
+  background: linear-gradient(to bottom, #5c5a5a, #121212);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#delete:active {
+  transform: scale(0.97) translateY(2px);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
