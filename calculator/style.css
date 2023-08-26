@@ -32,11 +32,18 @@ body {
 
 .calc-screen {
   flex: 1;
-  width: calc(100% - 2 * 5px); /* 5 px padding on each side of calc-container */
+  width: calc(
+    100% - 4 * 5px
+  ); /* 5 px padding on each side of calc-container + 5px padding in calc-screen */
   border-bottom: 3px solid #afafaf;
   border-radius: 5px;
-  flex-shrink: 0;
+  padding: 5px;
   background-color: rgb(56, 56, 46);
+  font-size: 80px;
+  color: #afafaf;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .calc-buttons {
