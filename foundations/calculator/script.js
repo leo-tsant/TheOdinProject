@@ -106,6 +106,8 @@ calcButtons.forEach((item) => {
         screen.innerHTML += event.target.textContent;
       } else if (equalsButtonPressed) {
         screen.innerHTML = "0.";
+      } else {
+        screen.innerHTML += event.target.textContent; // append the clicked number
       }
     }
 
