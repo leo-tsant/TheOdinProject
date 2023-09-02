@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Roboto:wght@100;400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* This ensures padding doesn't add extra width/height */
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Libre Baskerville", serif;
+  background: #756d41 radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+}
+
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 100px 1fr 50px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(232, 235, 227);
+  font-size: 50px;
+
+  font-weight: 600;
+  margin: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+}
+th,
+td {
+  border: 1px solid black;
+  padding: 8px 12px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-weight: 500; /* Added font weight */
+  padding: 0 20px; /* Side padding for larger screens */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+  font-size: 14px;
+}
+
+.footer a {
+  color: rgb(212, 211, 129);
+  text-decoration: none; /* Added underline to identify as link */
+  transition: color 0.3s ease; /* Transition for hover effect */
+  font-weight: 700;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
