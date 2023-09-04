@@ -7,25 +7,19 @@ function Book(title, author, pages, status) {
     this.status = status;
 }
 
-const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 200, "Read");
-const book2 = new Book("The Great Gatsby ", "F. Scott Fitzgerald 2", 500, "Not Read");
-
-myLibrary.push(book1);
-myLibrary.push(book2);
+Book.prototype.toggleStatus = function () {
+    this.status = this.status === "Read" ? "Not Read" : "Read";
+};
 
 const tableBody = document.querySelector(".table-body");
 
-// Function that displays the books in the library
 function displayBooks() {
-    const tableBody = document.querySelector(".table-body");
-
     tableBody.innerHTML = "";
 
     for (let i = 0; i < myLibrary.length; i++) {
         const row = document.createElement("tr");
         row.setAttribute("data-index", i);
 
-        // Create a delete button for each row
         const deleteButton = document.createElement("td");
         deleteButton.classList.add("delete-button");
         deleteButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="25px">
@@ -34,31 +28,31 @@ function displayBooks() {
                                     />
                                 </svg>`;
 
-        // Add event listener to the delete button
-        deleteButton.addEventListener("click", () => {
-            const index = deleteButton.parentElement.getAttribute("data-index");
-            myLibrary.splice(index, 1);
+        const statusButton = document.createElement("button");
+        statusButton.classList.add("status-button");
+        statusButton.classList.add("add-book");
+        statusButton.textContent = "Toggle Status";
+
+        statusButton.addEventListener("click", () => {
+            myLibrary[i].toggleStatus();
             displayBooks();
         });
 
         row.innerHTML = `<td>${myLibrary[i].title}</td>
-                        <td>${myLibrary[i].author}</td>
-                        <td>${myLibrary[i].pages}</td>
-                        <td>${myLibrary[i].status}</td>`;
+                                                <td>${myLibrary[i].author}</td>
+                                                <td>${myLibrary[i].pages}</td>
+                                                <td>${myLibrary[i].status + " "}</td>`; // Add a space after the status
+        const statusCell = row.querySelector("td:last-child");
+        statusCell.appendChild(statusButton); // Append the status button to the status cell
         tableBody.appendChild(row);
-        row.appendChild(deleteButton); // Append the delete button to the current row
+        row.appendChild(deleteButton); // Append the delete button to the row
     }
 }
 
-// Function that adds a book to the library
-function addBookToLibrary() {
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = document.getElementById("pages").value;
-    const status = document.getElementById("status").value;
-
+function addBookToLibrary(title, author, pages, status) {
     const newBook = new Book(title, author, pages, status);
     myLibrary.push(newBook);
+    displayBooks();
 }
 
 const addBookButton = document.querySelector(".add-book");
@@ -67,20 +61,21 @@ const closeButton = document.querySelector(".close-button");
 const addBookForm = document.getElementById("add-book-form");
 
 addBookButton.addEventListener("click", () => {
-    // Display the overlay and popup form
     popupOverlay.style.display = "flex";
 });
 
 closeButton.addEventListener("click", () => {
-    // Hide the overlay and popup form when the close button is clicked
     popupOverlay.style.display = "none";
 });
 
 addBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    addBookToLibrary();
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const status = document.getElementById("status").value;
+    addBookToLibrary(title, author, pages, status);
     popupOverlay.style.display = "none";
-    displayBooks();
 });
 
 displayBooks();

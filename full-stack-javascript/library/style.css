@@ -75,7 +75,8 @@ td:not(.delete-button) {
     border: 1px solid black;
     padding: 8px 12px;
     text-align: left;
-    min-width: 300px; /* Minimum width of 200px */
+    max-width: 300px;
+    min-width: 220px;
 }
 th {
     background-color: #454d2c;
@@ -123,10 +124,79 @@ tr:nth-child(even) td:not(.delete-button) {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 400px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    background-color: #ff3b30;
+    font-size: 24px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.close-button:hover {
+    background-color: #d9534f;
+}
+
+form button {
     margin-top: 10px;
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(32, 97, 35);
+    border: 1.4px solid rgb(102, 143, 104);
+    width: 150px;
+    height: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background: rgb(76, 150, 26);
+}
+
+label {
+    font-size: 18px;
+}
+
+.input-fields {
+    width: 100%;
+}
+
+input {
+    width: 200px;
+    height: 22px;
+}
+
+.popup-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .footer {
