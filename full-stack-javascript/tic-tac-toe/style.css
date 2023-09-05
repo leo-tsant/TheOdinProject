@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* This ensures padding doesn't add extra width/height */
+}
+
+body {
+    background: #0d5764 radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.01));
+    min-height: 100vh;
+}
+
+.container {
+    height: 100%;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 150px 1fr 50px;
+}
+
+.header {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 600;
+    color: #f5f5f5;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.board {
+    height: 600px;
+    width: 600px;
+    background-color: rgb(40, 197, 197);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    justify-self: center;
+    align-self: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-weight: 500; /* Added font weight */
+    padding: 0 20px; /* Side padding for larger screens */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+    font-size: 14px;
+}
+
+.footer a {
+    color: rgb(56, 179, 228);
+    text-decoration: none; /* Added underline to identify as link */
+    transition: color 0.3s ease; /* Transition for hover effect */
+    font-weight: 700;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
