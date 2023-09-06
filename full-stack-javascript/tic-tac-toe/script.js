@@ -101,6 +101,12 @@ const checkWin = (mark) => {
     for (const combination of winCombinations) {
         const [a, b, c] = combination;
         if (board[a] === mark && board[b] === mark && board[c] === mark) {
+            const winningCells = document.querySelectorAll(`[data-index="${a}"], [data-index="${b}"], [data-index="${c}"]`);
+            console.log(winningCells);
+            winningCells.forEach((cell) => {
+                cell.classList.add("winning-cell");
+            });
+
             return true; // Player has won.
         }
     }

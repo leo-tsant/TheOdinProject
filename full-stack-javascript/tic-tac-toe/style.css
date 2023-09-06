@@ -79,6 +79,11 @@ body {
     align-items: center;
     font-size: 150px;
     color: #fff;
+    position: relative;
+}
+
+.winning-cell {
+    color: rgb(41, 7, 134);
 }
 
 .cell:hover {
