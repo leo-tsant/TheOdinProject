@@ -13,12 +13,27 @@ body {
     height: 100%;
     display: grid;
     height: 100vh;
-    grid-template-rows: 150px 1fr 50px;
+    grid-template-rows: 100px 1fr 50px;
 }
 
 .header {
     text-align: center;
-    font-size: 50px;
+    font-size: 70px;
+    font-weight: 600;
+    color: #f5f5f5;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.game-info {
+    margin: 20px 0;
+    font-size: 40px;
     font-weight: 600;
     color: #f5f5f5;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -30,11 +45,40 @@ body {
     background-color: rgb(40, 197, 197);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    justify-self: center;
-    align-self: flex-start;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+}
+
+.restart-button {
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: 600;
+    color: #f5f5f5;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: rgb(197, 73, 16);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restart-button:hover {
+    background-color: rgb(175, 61, 7);
+}
+
+.restart-button:active {
+    transform: scale(0.9);
+}
+
+.cell {
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150px;
+    color: #fff;
 }
 
 .footer {
