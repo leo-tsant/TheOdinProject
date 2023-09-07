@@ -1,0 +1,108 @@
+@font-face {
+    font-family: "Italiano";
+    src: url("./fonts/Italianno-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Felipa";
+    src: url("./fonts/Felipa-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #8b640e radial-gradient(rgba(175, 134, 20, 0.2), rgba(116, 105, 71, 0.7));
+}
+
+#container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 200px 1fr 50px;
+}
+
+.header {
+    color: #f5f5f5;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: rgb(192, 153, 24);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.header-text {
+    justify-self: start;
+}
+
+.icon {
+    width: 180px;
+    justify-self: end;
+}
+
+.title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 100px;
+    letter-spacing: 6px;
+    font-family: "Italiano", sans-serif;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: "Felipa", sans-serif;
+    letter-spacing: 2px;
+}
+
+.tab {
+    cursor: pointer;
+}
+
+.tab:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.content {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-weight: 500; /* Added font weight */
+    padding: 0 20px; /* Side padding for larger screens */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+    font-size: 14px;
+}
+
+.footer a {
+    color: rgb(231, 235, 17);
+    text-decoration: none; /* Added underline to identify as link */
+    transition: color 0.3s ease; /* Transition for hover effect */
+    font-weight: 700;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
