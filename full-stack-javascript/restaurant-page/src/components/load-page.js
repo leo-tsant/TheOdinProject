@@ -13,13 +13,13 @@ function loadPage() {
     title.className = "title";
     title.textContent = "Alfredo's Pizza";
 
-    // // Create the img element
-    // const img = document.createElement("img");
-    // img.className = "icon";
-    // img.src = pizzaIcon;
+    // Create the img element
+    const img = document.createElement("img");
+    img.className = "icon";
+    img.src = pizzaIcon;
 
-    // // Append img to the header
-    // header.appendChild(img);
+    // Append img to the header
+    headerText.appendChild(img);
 
     // Create the tabs element
     const tabs = document.createElement("div");

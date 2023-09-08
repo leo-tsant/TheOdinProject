@@ -39,11 +39,14 @@ body {
 
 .header-text {
     justify-self: start;
+    position: relative;
 }
 
 .icon {
     width: 180px;
+    position: absolute;
     justify-self: end;
+    left: -200px;
 }
 
 .title {
