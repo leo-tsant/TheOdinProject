@@ -1,3 +1,4 @@
+import home from "../../../restaurant-page/src/components/home";
 import checkmarkIcon from "../images/checkmark.svg";
 
 const loadPage = () => {
@@ -22,6 +23,7 @@ const loadPage = () => {
 
     // Home List
     const homeList = document.createElement("div");
+    homeList.classList.add("sidebar-list");
     const homeListTitle = document.createElement("div");
     homeListTitle.classList.add("sidebar-title");
     homeListTitle.textContent = "Home";
@@ -29,6 +31,7 @@ const loadPage = () => {
     const homeListItems = document.createElement("ul");
 
     const homeListItemsAllTasks = document.createElement("li");
+    homeListItemsAllTasks.id = "all-tasks";
     homeListItemsAllTasks.classList.add("sidebar-item");
     const homeListItemsAllTasksText = document.createElement("div");
     homeListItemsAllTasksText.classList.add("sidebar-item-text");
@@ -42,6 +45,7 @@ const loadPage = () => {
     homeListItems.appendChild(homeListItemsAllTasks);
 
     const homeListItemsToday = document.createElement("li");
+    homeListItemsToday.id = "today";
     homeListItemsToday.classList.add("sidebar-item");
     const homeListItemsTodayText = document.createElement("div");
     homeListItemsTodayText.classList.add("sidebar-item-text");
@@ -55,6 +59,7 @@ const loadPage = () => {
     homeListItems.appendChild(homeListItemsToday);
 
     const homeListItemsThisWeek = document.createElement("li");
+    homeListItemsThisWeek.id = "this-week";
     homeListItemsThisWeek.classList.add("sidebar-item");
     const homeListItemsThisWeekText = document.createElement("div");
     homeListItemsThisWeekText.classList.add("sidebar-item-text");
@@ -68,6 +73,7 @@ const loadPage = () => {
     homeListItems.appendChild(homeListItemsThisWeek);
 
     const homeListItemsImportant = document.createElement("li");
+    homeListItemsImportant.id = "important";
     homeListItemsImportant.classList.add("sidebar-item");
     const homeListItemsImportantText = document.createElement("div");
     homeListItemsImportantText.classList.add("sidebar-item-text");
@@ -82,6 +88,7 @@ const loadPage = () => {
 
     // Projects List
     const projectsList = document.createElement("div");
+    projectsList.classList.add("sidebar-list");
     const projectsListTitle = document.createElement("div");
     projectsListTitle.textContent = "Projects";
     projectsListTitle.classList.add("sidebar-title");
