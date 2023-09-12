@@ -1,24 +1,6 @@
-import home from "../../../restaurant-page/src/components/home";
-import checkmarkIcon from "../images/checkmark.svg";
+import checkmarkIcon from "../../images/checkmark.svg";
 
-const loadPage = () => {
-    const container = document.querySelector(".container");
-
-    // HEADER
-    const header = document.querySelector(".header");
-
-    const headerText = document.createElement("div");
-    headerText.textContent = "To Do List";
-    headerText.classList.add("header-text");
-
-    const headerIcon = document.createElement("img");
-    headerIcon.className = "icon";
-    headerIcon.src = checkmarkIcon;
-
-    header.appendChild(headerIcon);
-    header.appendChild(headerText);
-
-    // SIDEBAR
+const sidebar = () => {
     const sidebar = document.querySelector(".sidebar");
 
     // Home List
@@ -116,13 +98,6 @@ const loadPage = () => {
 
     sidebar.appendChild(homeList);
     sidebar.appendChild(projectsList);
-
-    // FOOTER
-    const footer = document.querySelector(".footer");
-    footer.innerHTML =
-        'Created by &nbsp;<a href="https://github.com/leo-tsant" target="_blank">Leonidas Tsantarliotis</a>&nbsp;for&nbsp;<a href="https://www.theodinproject.com/dashboard" target="_blank">The Odin Project</a>';
-
-    container.appendChild(footer);
 };
 
-export default loadPage;
+export default sidebar;
