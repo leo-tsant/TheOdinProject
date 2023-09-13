@@ -1,5 +1,5 @@
-import form from "./form";
-import editTaskForm from "./edit-task-form";
+import form from "./forms/form";
+import editTaskForm from "./forms/edit-task-form";
 import "../styles/task.css";
 import trashIcon from "../images/trash.png";
 import editIcon from "../images/edit.svg";

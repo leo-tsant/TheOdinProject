@@ -11,6 +11,7 @@ const sidebar = () => {
     homeListTitle.textContent = "Home";
 
     const homeListItems = document.createElement("ul");
+    homeListItems.id = "home-list";
 
     const homeListItemsAllTasks = document.createElement("li");
     homeListItemsAllTasks.id = "all-tasks";
@@ -68,6 +69,9 @@ const sidebar = () => {
     homeListItemsImportant.appendChild(homeListItemsImportantText);
     homeListItems.appendChild(homeListItemsImportant);
 
+    homeList.appendChild(homeListTitle);
+    homeList.appendChild(homeListItems);
+
     // Projects List
     const projectsList = document.createElement("div");
     projectsList.classList.add("sidebar-list");
@@ -76,9 +80,11 @@ const sidebar = () => {
     projectsListTitle.classList.add("sidebar-title");
 
     const projectsListItems = document.createElement("ul");
+    projectsListItems.id = "projects-list";
 
     const projectsListItemsAddProject = document.createElement("li");
     projectsListItemsAddProject.classList.add("sidebar-item");
+    projectsListItemsAddProject.id = "add-project";
     const projectsListItemsAddProjectText = document.createElement("div");
     projectsListItemsAddProjectText.classList.add("sidebar-item-text");
     projectsListItemsAddProjectText.textContent = "Add Project";
@@ -89,9 +95,6 @@ const sidebar = () => {
     projectsListItemsAddProject.appendChild(projectsListItemsAddProjectIcon);
     projectsListItemsAddProject.appendChild(projectsListItemsAddProjectText);
     projectsListItems.appendChild(projectsListItemsAddProject);
-
-    homeList.appendChild(homeListTitle);
-    homeList.appendChild(homeListItems);
 
     projectsList.appendChild(projectsListTitle);
     projectsList.appendChild(projectsListItems);
