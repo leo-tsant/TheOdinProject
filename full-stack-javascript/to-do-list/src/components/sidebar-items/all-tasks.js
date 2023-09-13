@@ -20,7 +20,7 @@ const allTasks = () => {
     content.appendChild(tasksContainer);
 
     createTaskForm();
-    displayTasks();
+    displayTasks("allTasks");
 };
 
 export default allTasks;
