@@ -83,7 +83,6 @@ const form = () => {
         const textarea = document.createElement("textarea");
         textarea.id = inputName;
         textarea.name = inputName;
-        textarea.required = true;
 
         fieldContainer.appendChild(label);
         fieldContainer.appendChild(textarea);

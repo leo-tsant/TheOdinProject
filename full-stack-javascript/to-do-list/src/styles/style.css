@@ -83,7 +83,7 @@ ul {
     grid-column: 2 / 3;
     padding: 20px;
     display: grid;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 70px 1fr;
     justify-items: center;
 }
 
@@ -97,6 +97,14 @@ ul {
     background: #a0a7a0 radial-gradient(rgba(22, 22, 21, 0.5), rgba(8, 8, 7, 0.7));
     width: 100%;
     padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.tasks-container {
+    width: 100%;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
 }
 
 .add-new-task-button {
