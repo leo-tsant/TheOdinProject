@@ -1,4 +1,5 @@
 import checkmarkIcon from "../../images/checkmark.svg";
+import displayProjectTasks from "../sidebar-items/display-project-tasks";
 
 const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
@@ -38,11 +39,15 @@ const newProjectForm = () => {
     projectForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
+        const newTaskOverlay = document.getElementById("new-task-overlay");
+        if (newTaskOverlay) {
+            newTaskOverlay.remove();
+        }
+
         const projectName = document.getElementById("project-name").value;
 
         const project = {
             name: projectName,
-            tasks: [],
         };
 
         projects.push(project);
@@ -50,6 +55,7 @@ const newProjectForm = () => {
 
         projectsList.removeChild(projectForm);
         displayProjects();
+        displayProjectTasks(project);
     });
 
     fieldContainer.appendChild(label);
@@ -84,6 +90,10 @@ const displayProjects = () => {
         const projectItemIcon = document.createElement("img");
         projectItemIcon.classList.add("sidebar-item-icon");
         projectItemIcon.src = checkmarkIcon;
+
+        projectItem.addEventListener("click", () => {
+            displayProjectTasks(project);
+        });
 
         projectItem.appendChild(projectItemIcon);
         projectItem.appendChild(projectItemText);

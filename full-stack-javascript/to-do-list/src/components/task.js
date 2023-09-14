@@ -1,4 +1,4 @@
-import form from "./forms/form";
+import form from "./forms/add-task-form";
 import editTaskForm from "./forms/edit-task-form";
 import "../styles/task.css";
 import trashIcon from "../images/trash.png";
@@ -6,7 +6,7 @@ import editIcon from "../images/edit.svg";
 
 const tasks = [];
 
-const createTask = (title, description, dueDate, importance) => {
+const createTask = (title, description, dueDate, importance, projectName) => {
     const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     let maxID = existingTasks.reduce((maxID, task) => {
         return Math.max(maxID, task.id);
@@ -20,6 +20,7 @@ const createTask = (title, description, dueDate, importance) => {
         description: description,
         dueDate: dueDate,
         importance: importance,
+        project: projectName,
     };
 
     return toDoItem;
@@ -75,6 +76,10 @@ const displayTasks = (whichTasks) => {
         });
     } else if (whichTasks === "allTasks") {
         filteredTasks = tasks;
+    } else {
+        filteredTasks = tasks.filter((task) => {
+            return task.project === whichTasks;
+        });
     }
 
     filteredTasks.forEach((task) => {
@@ -128,38 +133,34 @@ const displayTasks = (whichTasks) => {
     });
 };
 
-let firstLoad = true;
 const createTaskForm = () => {
-    // Only create the form once
-    if (firstLoad) {
-        form();
-        firstLoad = false;
-
-        const addTaskForm = document.getElementById("new-task-form");
-        addTaskForm.addEventListener("submit", (e) => {
-            const popupOverlay = document.getElementById("new-task-overlay");
-
-            e.preventDefault();
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
-            const dueDate = document.getElementById("dueDate").value;
-            const importance = document.getElementById("importance").value;
-            addTask(createTask(title, description, dueDate, importance));
-            displayTasks("allTasks");
-            popupOverlay.style.display = "none";
-        });
+    const newTaskOverlay = document.getElementById("new-task-overlay");
+    if (newTaskOverlay) {
+        newTaskOverlay.remove();
     }
+    form();
+
+    const addTaskForm = document.getElementById("new-task-form");
+    addTaskForm.addEventListener("submit", (e) => {
+        const newTaskOverlay = document.getElementById("new-task-overlay");
+        e.preventDefault();
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const dueDate = document.getElementById("dueDate").value;
+        const importance = document.getElementById("importance").value;
+        addTask(createTask(title, description, dueDate, importance));
+        displayTasks("allTasks");
+        newTaskOverlay.style.display = "none";
+    });
 
     const addNewTaskButton = document.querySelector(".add-new-task-button");
     addNewTaskButton.addEventListener("click", () => {
-        const popupOverlay = document.getElementById("new-task-overlay");
+        const newTaskOverlay = document.getElementById("new-task-overlay");
 
-        popupOverlay.style.display = "flex";
+        newTaskOverlay.style.display = "flex";
         const closeButton = document.querySelector(".close-button");
         closeButton.addEventListener("click", () => {
-            const popupOverlay = document.getElementById("new-task-overlay");
-
-            popupOverlay.style.display = "none";
+            newTaskOverlay.style.display = "none";
         });
     });
 };
@@ -282,6 +283,6 @@ const editTask = (whichTasks, task) => {
     });
 };
 
-export { createTaskForm, displayTasks };
+export { createTaskForm, displayTasks, addTask };
 
 export default createTask;
