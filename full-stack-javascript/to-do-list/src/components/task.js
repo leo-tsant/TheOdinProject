@@ -5,11 +5,17 @@ import trashIcon from "../images/trash.png";
 import editIcon from "../images/edit.svg";
 
 const tasks = [];
-let currentId = 0;
 
 const createTask = (title, description, dueDate, importance) => {
+    const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let maxID = existingTasks.reduce((maxID, task) => {
+        return Math.max(maxID, task.id);
+    }, 0);
+
+    const newID = maxID + 1;
+
     const toDoItem = {
-        id: currentId++, // Assign the currentId and then increment it.
+        id: newID, // Assign the currentId and then increment it.
         title: title,
         description: description,
         dueDate: dueDate,
@@ -162,62 +168,57 @@ const deleteTask = (whichTasks, task) => {
     const container = document.querySelector(".container");
     let popupOverlay = document.querySelector(".delete-card-overlay");
 
-    // Only create the popup once
-    if (!popupOverlay) {
-        popupOverlay = document.createElement("div");
-        popupOverlay.classList.add("delete-card-overlay");
-        const popup = document.createElement("div");
-        popup.classList.add("delete-card-popup");
-        const popupHeader = document.createElement("div");
-        popupHeader.classList.add("delete-card-popup-header");
-        const popupContent = document.createElement("div");
-        popupContent.classList.add("delete-card-popup-content");
-        const popupButtons = document.createElement("div");
-        popupButtons.classList.add("delete-card-popup-buttons");
-        const yesButton = document.createElement("button");
-        yesButton.classList.add("yes-button");
-        const noButton = document.createElement("button");
-        noButton.classList.add("no-button");
-        const closeButton = document.createElement("img");
-        closeButton.classList.add("close-button");
+    popupOverlay = document.createElement("div");
+    popupOverlay.classList.add("delete-card-overlay");
+    const popup = document.createElement("div");
+    popup.classList.add("delete-card-popup");
+    const popupContent = document.createElement("div");
+    popupContent.classList.add("delete-card-popup-content");
+    const popupButtons = document.createElement("div");
+    popupButtons.classList.add("delete-card-popup-buttons");
+    const yesButton = document.createElement("button");
+    yesButton.classList.add("yes-button");
+    const noButton = document.createElement("button");
+    noButton.classList.add("no-button");
+    const closeButton = document.createElement("img");
+    closeButton.classList.add("close-button");
 
-        popupOverlay.style.display = "flex";
-        popupHeader.textContent = "Delete Task";
-        popupContent.textContent = "Are you sure you want to delete this task?";
-        yesButton.textContent = "Yes";
-        noButton.textContent = "No";
+    popupOverlay.style.display = "flex";
+    popupContent.textContent = "Are you sure you want to delete this task?";
+    yesButton.textContent = "Yes";
+    noButton.textContent = "No";
 
-        yesButton.addEventListener("click", () => {
-            const index = tasks.indexOf(task);
-            tasks.splice(index, 1);
-            saveTasksToLocalStorage();
-            displayTasks(whichTasks);
-            popupOverlay.style.display = "none";
-        });
+    yesButton.addEventListener("click", () => {
+        const taskID = task.id;
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        const updatedTasks = tasks.filter((t) => t.id !== taskID);
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        displayTasks(whichTasks);
+        popupOverlay.remove();
+    });
 
-        noButton.addEventListener("click", () => {
-            popupOverlay.style.display = "none";
-        });
+    noButton.addEventListener("click", () => {
+        popupOverlay.remove();
+    });
 
-        closeButton.addEventListener("click", () => {
-            popupOverlay.style.display = "none";
-        });
+    closeButton.addEventListener("click", () => {
+        popupOverlay.remove();
+    });
 
-        popupOverlay.addEventListener("click", (e) => {
-            if (e.target === popupOverlay) {
-                popupOverlay.style.display = "none";
-            }
-        });
+    popupOverlay.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) {
+            popupOverlay.remove();
+        }
+    });
 
-        popupHeader.appendChild(closeButton);
-        popupButtons.appendChild(yesButton);
-        popupButtons.appendChild(noButton);
-        popup.appendChild(popupHeader);
-        popup.appendChild(popupContent);
-        popup.appendChild(popupButtons);
-        popupOverlay.appendChild(popup);
-        container.appendChild(popupOverlay);
-    }
+    popupButtons.appendChild(yesButton);
+    popupButtons.appendChild(noButton);
+    popup.appendChild(closeButton);
+    popup.appendChild(popupContent);
+    popup.appendChild(popupButtons);
+    popupOverlay.appendChild(popup);
+    container.appendChild(popupOverlay);
+
     // If the popup already exists, just display it
     popupOverlay.style.display = "flex";
 };

@@ -3,6 +3,7 @@ import today from "../sidebar-items/today";
 import thisWeek from "../sidebar-items/this-week";
 import important from "../sidebar-items/important";
 import addProject from "../sidebar-items/add-project";
+import { displayProjects } from "../forms/new-project-form";
 
 const content = () => {
     const content = document.querySelector(".content");
@@ -27,6 +28,8 @@ const content = () => {
 
     if (firstLoad) {
         handleTabClick(allTasks);
+        displayProjects();
+
         firstLoad = false;
     }
 };

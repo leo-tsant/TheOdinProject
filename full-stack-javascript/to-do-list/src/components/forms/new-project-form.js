@@ -1,4 +1,4 @@
-// import displayProjects from "../display-projects";
+import checkmarkIcon from "../../images/checkmark.svg";
 
 const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
@@ -59,13 +59,18 @@ const newProjectForm = () => {
     projectForm.appendChild(submitButton);
     projectForm.appendChild(cancelButton);
 
-    projectsList.append(projectForm);
+    projectsList.insertBefore(projectForm, projectsList.lastChild);
 };
 
 const displayProjects = () => {
     const projectsList = document.getElementById("projects-list");
+    const liElements = projectsList.querySelectorAll("li");
 
-    projectsList.innerHTML = "";
+    liElements.forEach((li) => {
+        if (li.id !== "add-project") {
+            li.remove();
+        }
+    });
 
     projects.forEach((project) => {
         const projectItem = document.createElement("li");
@@ -78,28 +83,13 @@ const displayProjects = () => {
 
         const projectItemIcon = document.createElement("img");
         projectItemIcon.classList.add("sidebar-item-icon");
-        projectItemIcon.src = "assets/checkmark.svg";
+        projectItemIcon.src = checkmarkIcon;
 
         projectItem.appendChild(projectItemIcon);
         projectItem.appendChild(projectItemText);
-        projectsList.appendChild(projectItem);
+        projectsList.insertBefore(projectItem, projectsList.lastChild);
     });
-
-    const addProjectItem = document.createElement("li");
-    addProjectItem.classList.add("sidebar-item");
-    addProjectItem.id = "add-project";
-
-    const addProjectItemText = document.createElement("div");
-    addProjectItemText.classList.add("sidebar-item-text");
-    addProjectItemText.textContent = "Add Project";
-
-    const addProjectItemIcon = document.createElement("img");
-    addProjectItemIcon.classList.add("sidebar-item-icon");
-    addProjectItemIcon.src = "assets/checkmark.svg";
-
-    addProjectItem.appendChild(addProjectItemIcon);
-    addProjectItem.appendChild(addProjectItemText);
-    projectsList.appendChild(addProjectItem);
 };
 
+export { displayProjects };
 export default newProjectForm;
