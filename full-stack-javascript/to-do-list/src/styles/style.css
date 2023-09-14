@@ -65,17 +65,41 @@ ul {
     transition: all 0.3s ease;
 }
 
-.sidebar-item:hover {
+.sidebar-item:hover,
+.sidebar-project-item:hover {
     cursor: pointer;
     background-color: #575553;
 }
 
-.sidebar-item:active {
+.sidebar-item:active,
+.sidebar-project-item:active {
     background-color: #777570;
 }
 
 .sidebar-item-icon {
     width: 25px;
+}
+
+.sidebar-project-item {
+    display: grid;
+    grid-template-columns: 25px 1fr 25px;
+    gap: 10px;
+    padding: 10px 0;
+    color: #f5f5f5;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+}
+
+.more-options-button {
+    width: 25px;
+}
+
+.more-options-popup-form {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    z-index: 10;
 }
 
 .content {

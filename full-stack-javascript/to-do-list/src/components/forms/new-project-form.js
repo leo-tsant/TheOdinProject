@@ -1,5 +1,7 @@
 import checkmarkIcon from "../../images/checkmark.svg";
 import displayProjectTasks from "../sidebar-items/display-project-tasks";
+import threeDotsIcon from "../../images/three-dots-vertical.svg";
+import allTasks from "../sidebar-items/all-tasks";
 
 const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
@@ -80,7 +82,7 @@ const displayProjects = () => {
 
     projects.forEach((project) => {
         const projectItem = document.createElement("li");
-        projectItem.classList.add("sidebar-item");
+        projectItem.classList.add("sidebar-project-item");
         projectItem.id = project.name;
 
         const projectItemText = document.createElement("div");
@@ -91,12 +93,44 @@ const displayProjects = () => {
         projectItemIcon.classList.add("sidebar-item-icon");
         projectItemIcon.src = checkmarkIcon;
 
+        const moreOptionsButton = document.createElement("img");
+        moreOptionsButton.classList.add("more-options-button");
+        moreOptionsButton.src = threeDotsIcon;
+
         projectItem.addEventListener("click", () => {
             displayProjectTasks(project);
         });
 
+        moreOptionsButton.addEventListener("click", () => {
+            const popupForm = document.createElement("div");
+            popupForm.classList.add("more-options-popup-form");
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const index = projects.findIndex((projectItem) => projectItem.name === project.name);
+                projects.splice(index, 1);
+                localStorage.setItem("projects", JSON.stringify(projects));
+                projectsList.removeChild(projectItem);
+                const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+                const updatedTasks = tasks.filter((task) => task.project !== project.name);
+                localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+                const content = document.querySelector(".content");
+                content.innerHTML = "";
+                allTasks();
+            });
+
+            popupForm.appendChild(deleteButton);
+
+            projectItem.appendChild(popupForm);
+        });
+
         projectItem.appendChild(projectItemIcon);
         projectItem.appendChild(projectItemText);
+        projectItem.appendChild(moreOptionsButton);
         projectsList.insertBefore(projectItem, projectsList.lastChild);
     });
 };
