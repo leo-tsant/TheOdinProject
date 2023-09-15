@@ -1,4 +1,9 @@
 import checkmarkIcon from "../../images/checkmark.svg";
+import allTasksIcon from "../../images/all-tasks.png";
+import todayIcon from "../../images/today.png";
+import thisWeekIcon from "../../images/this-week.png";
+import importantIcon from "../../images/important.png";
+import addProjectIcon from "../../images/add-project.svg";
 
 const sidebar = () => {
     const sidebar = document.querySelector(".sidebar");
@@ -21,7 +26,7 @@ const sidebar = () => {
     homeListItemsAllTasksText.textContent = "All Tasks";
     const homeListItemsAllTasksIcon = document.createElement("img");
     homeListItemsAllTasksIcon.classList.add("sidebar-item-icon");
-    homeListItemsAllTasksIcon.src = checkmarkIcon;
+    homeListItemsAllTasksIcon.src = allTasksIcon;
 
     homeListItemsAllTasks.appendChild(homeListItemsAllTasksIcon);
     homeListItemsAllTasks.appendChild(homeListItemsAllTasksText);
@@ -35,7 +40,7 @@ const sidebar = () => {
     homeListItemsTodayText.textContent = "Today";
     const homeListItemsTodayIcon = document.createElement("img");
     homeListItemsTodayIcon.classList.add("sidebar-item-icon");
-    homeListItemsTodayIcon.src = checkmarkIcon;
+    homeListItemsTodayIcon.src = todayIcon;
 
     homeListItemsToday.appendChild(homeListItemsTodayIcon);
     homeListItemsToday.appendChild(homeListItemsTodayText);
@@ -49,7 +54,7 @@ const sidebar = () => {
     homeListItemsThisWeekText.textContent = "This Week";
     const homeListItemsThisWeekIcon = document.createElement("img");
     homeListItemsThisWeekIcon.classList.add("sidebar-item-icon");
-    homeListItemsThisWeekIcon.src = checkmarkIcon;
+    homeListItemsThisWeekIcon.src = thisWeekIcon;
 
     homeListItemsThisWeek.appendChild(homeListItemsThisWeekIcon);
     homeListItemsThisWeek.appendChild(homeListItemsThisWeekText);
@@ -63,7 +68,7 @@ const sidebar = () => {
     homeListItemsImportantText.textContent = "Important";
     const homeListItemsImportantIcon = document.createElement("img");
     homeListItemsImportantIcon.classList.add("sidebar-item-icon");
-    homeListItemsImportantIcon.src = checkmarkIcon;
+    homeListItemsImportantIcon.src = importantIcon;
 
     homeListItemsImportant.appendChild(homeListItemsImportantIcon);
     homeListItemsImportant.appendChild(homeListItemsImportantText);
@@ -90,7 +95,7 @@ const sidebar = () => {
     projectsListItemsAddProjectText.textContent = "Add Project";
     const projectsListItemsAddProjectIcon = document.createElement("img");
     projectsListItemsAddProjectIcon.classList.add("sidebar-item-icon");
-    projectsListItemsAddProjectIcon.src = checkmarkIcon;
+    projectsListItemsAddProjectIcon.src = addProjectIcon;
 
     projectsListItemsAddProject.appendChild(projectsListItemsAddProjectIcon);
     projectsListItemsAddProject.appendChild(projectsListItemsAddProjectText);

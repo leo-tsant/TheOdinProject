@@ -21,7 +21,10 @@ const editTaskForm = (task) => {
     createInputField("Title:", "text", "title", task.title);
     createTextAreaField("Description:", "description", task.description);
     createInputField("Due Date:", "date", "dueDate", task.dueDate);
-    createSelectField("Importance:", "importance", ["High", "Medium", "Low"], task.importance);
+    createRadioButtons("Importance:", "importance", ["High", "Medium", "Low"], task.importance);
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
 
     const doneButton = document.createElement("button");
     doneButton.type = "submit";
@@ -32,9 +35,11 @@ const editTaskForm = (task) => {
     cancelButton.type = "button";
     cancelButton.textContent = "Cancel";
 
+    buttonContainer.appendChild(doneButton);
+    buttonContainer.appendChild(cancelButton);
+
     form.appendChild(inputFields);
-    form.appendChild(doneButton);
-    form.appendChild(cancelButton);
+    form.appendChild(buttonContainer);
 
     // Add all elements to the popup form
     editPopupForm.appendChild(formTitle);
@@ -71,6 +76,7 @@ const editTaskForm = (task) => {
     function createTextAreaField(labelText, inputName, defaultValue) {
         const fieldContainer = document.createElement("div");
         fieldContainer.classList.add("box");
+        fieldContainer.classList.add("textarea");
 
         const label = document.createElement("label");
         label.textContent = labelText;
@@ -86,31 +92,43 @@ const editTaskForm = (task) => {
         inputFields.appendChild(fieldContainer);
     }
 
-    function createSelectField(labelText, inputName, options, defaultValue) {
+    function createRadioButtons(labelText, inputName, options, defaultValue) {
         const fieldContainer = document.createElement("div");
         fieldContainer.classList.add("box");
+        fieldContainer.classList.add("radio-buttons");
 
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.setAttribute("for", inputName);
+        const groupLabel = document.createElement("label");
+        groupLabel.textContent = labelText;
 
-        const select = document.createElement("select");
-        select.id = inputName;
-        select.name = inputName;
-        select.required = true;
+        fieldContainer.appendChild(groupLabel);
 
         options.forEach((optionText) => {
-            const option = document.createElement("option");
-            option.value = optionText;
-            option.textContent = optionText;
+            const optionId = `${inputName}-${optionText}`;
+
+            const optionContainer = document.createElement("div");
+
+            const radioInput = document.createElement("input");
+            radioInput.type = "radio";
+            radioInput.name = inputName;
+            radioInput.id = optionId;
+            radioInput.value = optionText;
+            radioInput.required = true;
+
+            // If the optionText matches the defaultValue, set this radio button as checked
             if (optionText === defaultValue) {
-                option.selected = true;
+                radioInput.checked = true;
             }
-            select.appendChild(option);
+
+            const label = document.createElement("label");
+            label.textContent = optionText;
+            label.setAttribute("for", optionId);
+
+            optionContainer.appendChild(radioInput);
+            optionContainer.appendChild(label);
+
+            fieldContainer.appendChild(optionContainer);
         });
 
-        fieldContainer.appendChild(label);
-        fieldContainer.appendChild(select);
         inputFields.appendChild(fieldContainer);
     }
 };

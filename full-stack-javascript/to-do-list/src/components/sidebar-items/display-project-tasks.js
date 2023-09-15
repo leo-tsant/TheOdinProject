@@ -39,11 +39,11 @@ const displayProjectTasks = (project) => {
         addTaskForm = clone;
 
         const popupOverlay = document.getElementById("new-task-overlay");
-        const closeButton = document.querySelector(".close-button");
 
-        closeButton.addEventListener("click", () => {
-            const popupOverlay = document.getElementById("new-task-overlay");
-
+        // Add an event listener for the cancel button
+        const cancelButton = document.querySelector("#cancel-button");
+        cancelButton.addEventListener("click", () => {
+            // Close the form without making any changes
             popupOverlay.style.display = "none";
         });
 
@@ -58,7 +58,8 @@ const displayProjectTasks = (project) => {
             const title = document.getElementById("title").value;
             const description = document.getElementById("description").value;
             const dueDate = document.getElementById("dueDate").value;
-            const importance = document.getElementById("importance").value;
+            const selectedRadioButton = document.querySelector(`#new-task-form input[name="importance"]:checked`);
+            const importance = selectedRadioButton ? selectedRadioButton.value : null;
 
             // Create a new task with the fetched values
             const newTask = createTask(title, description, dueDate, importance, project.name);

@@ -1,6 +1,7 @@
 import form from "./forms/add-task-form";
 import editTaskForm from "./forms/edit-task-form";
 import "../styles/task.css";
+import "../styles/delete-task.css";
 import trashIcon from "../images/trash.png";
 import editIcon from "../images/edit.svg";
 
@@ -86,17 +87,21 @@ const displayTasks = (whichTasks) => {
         const card = document.createElement("div");
         card.classList.add("card");
 
-        const title = document.createElement("h2");
+        const title = document.createElement("div");
+        title.classList.add("task-title");
         title.textContent = task.title;
 
         const description = document.createElement("p");
+        description.classList.add("task-description");
         description.textContent = task.description;
 
-        const dueDate = document.createElement("p");
-        dueDate.textContent = task.dueDate;
+        const dueDate = document.createElement("div");
+        dueDate.classList.add("task-due-date");
+        dueDate.textContent = `Due: ${task.dueDate}`;
 
         const importance = document.createElement("div");
-        importance.textContent = task.importance;
+        importance.classList.add("task-importance");
+        importance.textContent = `Importance: ${task.importance}`;
 
         if (task.importance === "High") {
             card.classList.add("high-importance");
@@ -106,19 +111,19 @@ const displayTasks = (whichTasks) => {
             card.classList.add("low-importance");
         }
 
-        const deleteCardButton = document.createElement("img");
-        deleteCardButton.classList.add("delete-card-button");
-        deleteCardButton.src = trashIcon;
+        const deleteTaskButton = document.createElement("img");
+        deleteTaskButton.classList.add("delete-task-button");
+        deleteTaskButton.src = trashIcon;
 
-        deleteCardButton.addEventListener("click", () => {
+        deleteTaskButton.addEventListener("click", () => {
             deleteTask(whichTasks, task);
         });
 
-        const editCardButton = document.createElement("img");
-        editCardButton.classList.add("edit-card-button");
-        editCardButton.src = editIcon;
+        const editTaskButton = document.createElement("img");
+        editTaskButton.classList.add("edit-task-button");
+        editTaskButton.src = editIcon;
 
-        editCardButton.addEventListener("click", () => {
+        editTaskButton.addEventListener("click", () => {
             editTask(whichTasks, task);
         });
 
@@ -126,8 +131,8 @@ const displayTasks = (whichTasks) => {
         card.appendChild(description);
         card.appendChild(dueDate);
         card.appendChild(importance);
-        card.appendChild(deleteCardButton);
-        card.appendChild(editCardButton);
+        card.appendChild(deleteTaskButton);
+        card.appendChild(editTaskButton);
 
         tasksContainer.appendChild(card);
     });
@@ -147,7 +152,8 @@ const createTaskForm = () => {
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
         const dueDate = document.getElementById("dueDate").value;
-        const importance = document.getElementById("importance").value;
+        const selectedRadioButton = document.querySelector(`#new-task-form input[name="importance"]:checked`);
+        const importance = selectedRadioButton ? selectedRadioButton.value : null;
         addTask(createTask(title, description, dueDate, importance));
         displayTasks("allTasks");
         newTaskOverlay.style.display = "none";
@@ -158,8 +164,8 @@ const createTaskForm = () => {
         const newTaskOverlay = document.getElementById("new-task-overlay");
 
         newTaskOverlay.style.display = "flex";
-        const closeButton = document.querySelector(".close-button");
-        closeButton.addEventListener("click", () => {
+        const cancelButton = document.querySelector("#cancel-button");
+        cancelButton.addEventListener("click", () => {
             newTaskOverlay.style.display = "none";
         });
     });
@@ -167,21 +173,22 @@ const createTaskForm = () => {
 
 const deleteTask = (whichTasks, task) => {
     const container = document.querySelector(".container");
-    let popupOverlay = document.querySelector(".delete-card-overlay");
+    let popupOverlay = document.querySelector(".delete-task-overlay");
 
     popupOverlay = document.createElement("div");
-    popupOverlay.classList.add("delete-card-overlay");
+    popupOverlay.classList.add("delete-task-overlay");
     const popup = document.createElement("div");
-    popup.classList.add("delete-card-popup");
+    popup.classList.add("delete-task-popup");
     const popupContent = document.createElement("div");
-    popupContent.classList.add("delete-card-popup-content");
+    popupContent.classList.add("delete-task-popup-content");
     const popupButtons = document.createElement("div");
-    popupButtons.classList.add("delete-card-popup-buttons");
+    popupButtons.classList.add("delete-task-popup-buttons");
     const yesButton = document.createElement("button");
     yesButton.classList.add("yes-button");
     const noButton = document.createElement("button");
     noButton.classList.add("no-button");
-    const closeButton = document.createElement("img");
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "×";
     closeButton.classList.add("close-button");
 
     popupOverlay.style.display = "flex";
@@ -212,8 +219,8 @@ const deleteTask = (whichTasks, task) => {
         }
     });
 
-    popupButtons.appendChild(yesButton);
     popupButtons.appendChild(noButton);
+    popupButtons.appendChild(yesButton);
     popup.appendChild(closeButton);
     popup.appendChild(popupContent);
     popup.appendChild(popupButtons);
@@ -243,7 +250,8 @@ const editTask = (whichTasks, task) => {
         const title = form.querySelector("#title").value;
         const description = form.querySelector("#description").value;
         const dueDate = form.querySelector("#dueDate").value;
-        const importance = form.querySelector("#importance").value;
+        const selectedRadioButton = document.querySelector(`#edit-task-form input[name="importance"]:checked`);
+        const importance = selectedRadioButton ? selectedRadioButton.value : null;
 
         // Update the task object with the new values
         task.title = title;

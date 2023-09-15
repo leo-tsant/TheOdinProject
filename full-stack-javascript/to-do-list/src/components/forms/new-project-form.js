@@ -1,6 +1,6 @@
-import checkmarkIcon from "../../images/checkmark.svg";
 import displayProjectTasks from "../sidebar-items/display-project-tasks";
 import threeDotsIcon from "../../images/three-dots-vertical.svg";
+import projectIcon from "../../images/project.svg";
 import allTasks from "../sidebar-items/all-tasks";
 
 const projects = JSON.parse(localStorage.getItem("projects")) || [];
@@ -17,23 +17,26 @@ const newProjectForm = () => {
     const fieldContainer = document.createElement("div");
     fieldContainer.classList.add("box");
 
-    const label = document.createElement("label");
-    label.textContent = "Project Name";
-    label.setAttribute("for", "project-name");
-
     const input = document.createElement("input");
     input.type = "text";
     input.id = "project-name";
     input.name = "project-name";
     input.required = true;
+    input.placeholder = "Project Name";
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    buttonContainer.id = "new-project-form-button-container";
 
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
     submitButton.textContent = "Add Project";
+    submitButton.id = "new-project-form-submit-button";
 
     const cancelButton = document.createElement("button");
     cancelButton.type = "button";
     cancelButton.textContent = "Cancel";
+    cancelButton.id = "new-project-form-cancel-button";
     cancelButton.addEventListener("click", () => {
         projectsList.removeChild(projectForm);
     });
@@ -60,15 +63,17 @@ const newProjectForm = () => {
         displayProjectTasks(project);
     });
 
-    fieldContainer.appendChild(label);
     fieldContainer.appendChild(input);
 
+    buttonContainer.appendChild(submitButton);
+    buttonContainer.appendChild(cancelButton);
     projectForm.appendChild(fieldContainer);
-    projectForm.appendChild(submitButton);
-    projectForm.appendChild(cancelButton);
+    projectForm.appendChild(buttonContainer);
 
     projectsList.insertBefore(projectForm, projectsList.lastChild);
 };
+
+let currentPopupForm = null;
 
 const displayProjects = () => {
     const projectsList = document.getElementById("projects-list");
@@ -91,17 +96,28 @@ const displayProjects = () => {
 
         const projectItemIcon = document.createElement("img");
         projectItemIcon.classList.add("sidebar-item-icon");
-        projectItemIcon.src = checkmarkIcon;
+        projectItemIcon.src = projectIcon;
 
         const moreOptionsButton = document.createElement("img");
         moreOptionsButton.classList.add("more-options-button");
         moreOptionsButton.src = threeDotsIcon;
 
+        const moreOptionsContainer = document.createElement("div");
+        moreOptionsContainer.classList.add("more-options-container");
+
         projectItem.addEventListener("click", () => {
             displayProjectTasks(project);
         });
 
-        moreOptionsButton.addEventListener("click", () => {
+        moreOptionsButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            // Remove the currently displayed popup form (if any)
+            if (currentPopupForm) {
+                currentPopupForm.parentNode.removeChild(currentPopupForm);
+                currentPopupForm = null;
+            }
+
             const popupForm = document.createElement("div");
             popupForm.classList.add("more-options-popup-form");
 
@@ -125,12 +141,24 @@ const displayProjects = () => {
 
             popupForm.appendChild(deleteButton);
 
-            projectItem.appendChild(popupForm);
+            moreOptionsContainer.appendChild(popupForm);
+            currentPopupForm = popupForm;
+
+            document.addEventListener("click", function hideForm(e) {
+                // Check if the target of the click event is the delete button or the more options button
+                if (currentPopupForm && e.target !== deleteButton && e.target !== moreOptionsButton) {
+                    // If it is not, remove the pop-up form and the event listener itself
+                    currentPopupForm.parentNode.removeChild(currentPopupForm);
+                    currentPopupForm = null;
+                    document.removeEventListener("click", hideForm);
+                }
+            });
         });
+        moreOptionsContainer.appendChild(moreOptionsButton);
 
         projectItem.appendChild(projectItemIcon);
         projectItem.appendChild(projectItemText);
-        projectItem.appendChild(moreOptionsButton);
+        projectItem.appendChild(moreOptionsContainer);
         projectsList.insertBefore(projectItem, projectsList.lastChild);
     });
 };
