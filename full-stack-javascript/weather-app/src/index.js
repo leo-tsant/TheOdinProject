@@ -10,7 +10,10 @@ form.addEventListener("submit", async (e) => {
 
     try {
         const weatherData = await getWeather(city);
-        displayWeather(weatherData);
+        displayWeather(weatherData, true);
+
+        const weatherContainer = document.getElementById("weatherContainer");
+        weatherContainer.classList.remove("hidden");
     } catch (error) {
         console.error("Error fetching weather:", error);
     }
