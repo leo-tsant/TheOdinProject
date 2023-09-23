@@ -1,4 +1,3 @@
-import checkmarkIcon from "../../images/checkmark.svg";
 import allTasksIcon from "../../images/all-tasks.png";
 import todayIcon from "../../images/today.png";
 import thisWeekIcon from "../../images/this-week.png";
